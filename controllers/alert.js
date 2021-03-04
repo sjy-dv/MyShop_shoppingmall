@@ -14,5 +14,7 @@ io.adapter(redisAdapter({ host: REDIS_HOST, port: REDIS_PORT }));
 module.exports = (function () {
   const S = {};
 
+  S.init = async (app) => {};
+
   return S;
 })();

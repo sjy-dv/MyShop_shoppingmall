@@ -121,7 +121,12 @@ if ((!isWin && !cluster.isMaster) || (isWin && cluster.isMaster)) {
     .createServer(app)
     .listen(PORT || 8081);
 
-  socket.io.attach(http_server);
+  //after write to socket server
+  //socket.io.attach(http_server);
 
-  const tensorflow = require('./tensorflow');
+  const { start } = require('./AI');
+  //becasue learning is long time..
+  setTimeout(() => {
+    start.StartAI();
+  }, 2000);
 }
