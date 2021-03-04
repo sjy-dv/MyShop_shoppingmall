@@ -1,0 +1,20 @@
+{
+    "plugins": ["prettier"],
+    "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 7,
+        "sourceType": "script",
+        "ecmaFeatures": {
+            "jsx": false,
+            "experimentalObjectRestSpread": true
+        }
+    },
+    "env": {
+        "browser": false,
+        "node": true
+    },
+    "rules": {
+        "prettier/prettier": "error"
+    }
+}

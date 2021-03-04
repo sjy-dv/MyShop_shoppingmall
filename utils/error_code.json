@@ -1,0 +1,22 @@
+{
+    "1" : {
+        "text" : "정의되지 않은 오류입니다.",
+        "error" : "undefined_error"
+    },
+    "2" : {
+        "text" : "세션이 만료되었습니다.",
+        "error" : "jwt is expired"
+    },
+    "3" : {
+        "text" : "전달된 파라미터가 잘못되었습니다.",
+        "error" : "parameter is error"
+    },
+    "4" : {
+        "text" : "데이터가 존재하지 않습니다.",
+        "error" : "none data"
+    },
+    "5" : {
+        "text" : "토큰 오류!! F12를 눌러 개발자 도구에서 Application 탭에 localStorage를 초기화 시켜주세요.",
+        "reason" : "JWT_TOKEN_ERROR"
+      }
+}
