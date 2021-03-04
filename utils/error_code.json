@@ -18,5 +18,9 @@
     "5" : {
         "text" : "토큰 오류!! F12를 눌러 개발자 도구에서 Application 탭에 localStorage를 초기화 시켜주세요.",
         "reason" : "JWT_TOKEN_ERROR"
-      }
+      },
+    "6" : {
+        "text" : "아직 학습이 끝나지 않았습니다. 잠시 후에 다시 시도해주세요.",
+        "reason" : "Machine Learning is not yet"
+    }
 }

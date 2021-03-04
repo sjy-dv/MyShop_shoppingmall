@@ -32,6 +32,7 @@ db.board = require('./shop_board.js')(sequelize, DataTypes);
 db.basket = require('./shop_basket.js')(sequelize, DataTypes);
 db.ask = require('./shop_ask.js')(sequelize, DataTypes);
 db.answer = require('./shop_answer.js')(sequelize, DataTypes);
+db.payment = require('./shop_payment.js')(sequelize, DataTypes);
 
 db.sequelize = sequelize;
 db.Op = Op;

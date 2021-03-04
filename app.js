@@ -60,9 +60,11 @@ if ((!isWin && !cluster.isMaster) || (isWin && cluster.isMaster)) {
   const helmet = require('helmet');
   const dotenv = require('dotenv');
   dotenv.config();
-  const { PORT } = process.env;
-  const http_server = require('http');
+  const { PORT, REDIS_HOST, REDIS_PORT } = process.env;
   const logger = require('morgan');
+  const slowDown = require('express-slow-down');
+  const RedisStore = require('rate-limit-redis');
+  const socket = require('./controllers/alert');
 
   const corsOption = {
     origin: [
@@ -73,14 +75,39 @@ if ((!isWin && !cluster.isMaster) || (isWin && cluster.isMaster)) {
     credentials: true,
   };
 
+  const redis_client = require('redis').createClient(REDIS_PORT, REDIS_HOST);
+  redis_client.on('error', (err) => {
+    console.log('Redis Error' + err);
+  });
+
+  const speedLimiter = slowDown({
+    store: new RedisStore({
+      client: redis_client,
+    }),
+    windowMs: 60 * 1000,
+    delayAfter: 5000,
+    delayMs: 500,
+    onLimitReached: function (req, res, options) {
+      console.log(`DOS 감지`);
+      const alert = require('./utils/mail').DosMail();
+    },
+  });
+
   app.use(cors());
   app.use(cors(corsOption));
   app.use(compression());
   app.use(helmet());
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: false }));
+  app.use(express.json({ limit: '50mb' }));
+  app.use(
+    express.urlencoded({
+      limit: '50mb',
+      extended: false,
+      parameterLimit: 1000000,
+    })
+  );
   app.use(logger('dev'));
   app.use('/img', express.static('./uploads'));
+  app.use(speedLimiter);
 
   const Router = require('./routes');
 
@@ -90,7 +117,11 @@ if ((!isWin && !cluster.isMaster) || (isWin && cluster.isMaster)) {
   app.use('/api/product', Router.ProductRouter);
   app.use('/api/question', Router.QuestionRouter);
 
-  http_server.createServer(app).listen(PORT || 8081, (error) => {
-    console.log(`http_error : ${error}`);
-  });
+  const http_server = require('http')
+    .createServer(app)
+    .listen(PORT || 8081);
+
+  socket.io.attach(http_server);
+
+  const tensorflow = require('./tensorflow');
 }
