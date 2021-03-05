@@ -10,11 +10,19 @@ redis_client.on('error', function (err) {
 });
 
 io.adapter(redisAdapter({ host: REDIS_HOST, port: REDIS_PORT }));
+let alert_socket = io.of('/');
 
 module.exports = (function () {
   const S = {};
+  S.alert_socket = alert_socket;
 
-  S.init = async (app) => {};
+  S.init = async (app) => {
+    alert_socket.on('connection', (socket) => {
+      console.log('socket in');
+    });
+  };
+
+  S.io = io;
 
   return S;
 })();

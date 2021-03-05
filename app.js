@@ -93,6 +93,8 @@ if ((!isWin && !cluster.isMaster) || (isWin && cluster.isMaster)) {
     },
   });
 
+  socket.init();
+
   app.use(cors());
   app.use(cors(corsOption));
   app.use(compression());
@@ -116,13 +118,14 @@ if ((!isWin && !cluster.isMaster) || (isWin && cluster.isMaster)) {
   app.use('/api/myinform', Router.MyinformRouter);
   app.use('/api/product', Router.ProductRouter);
   app.use('/api/question', Router.QuestionRouter);
+  app.use('/api/payment', Router.PaymentRouter);
 
   const http_server = require('http')
     .createServer(app)
     .listen(PORT || 8081);
 
   //after write to socket server
-  //socket.io.attach(http_server);
+  socket.io.attach(http_server);
 
   const { start } = require('./AI');
   //becasue learning is long time..

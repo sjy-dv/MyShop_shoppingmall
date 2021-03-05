@@ -62,18 +62,13 @@ class DetailPage extends Component {
     window.history.go(-1);
   }
 
-  bought = (e) => {
-    axios.post('http://localhost:8081/api/product/completebuy', {
-      id: window.sessionStorage.getItem('id'),
-      p_idx: window.sessionStorage.getItem('idx'),
-    });
-    axios
-      .post('http://localhost:8081/api/product/buyproduct', {
-        name: this.state.p_name,
-        price: this.state.p_price,
-      })
-      .catch((err) => console.log(err));
-    alert('상품을 구매하였습니다.');
+  bought = () => {
+    window.sessionStorage.setItem('price', this.state.p_price);
+    window.open(
+      '/payment',
+      '결제 선택창',
+      'width=900,height=700,location=no,status=no,scrollbars=yes'
+    );
   };
 
   comment = (e) => {

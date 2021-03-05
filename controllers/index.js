@@ -3,6 +3,7 @@ const productController = require('./product');
 const myinformController = require('./myinform');
 const questionController = require('./question');
 const boardController = require('./board');
+const paymentController = require('./payment');
 
 module.exports = {
   memberController,
@@ -10,4 +11,5 @@ module.exports = {
   myinformController,
   questionController,
   boardController,
+  paymentController,
 };

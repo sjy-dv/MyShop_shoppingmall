@@ -1,0 +1,28 @@
+{
+    "config" : {
+        "target" : "http://localhost:8081",
+        "phase" : [
+            {
+                "duration" : 60,
+                "arrivalRate" : 500
+            }
+        ],
+        "defaults" : {
+            "headers" : {
+                "User-Agent" : "Artillery"
+            }
+        }
+    },
+    "scenarios" : [
+        {
+            "name" : "결제 트래픽 테스트",
+            "flow" : [
+                {
+                    "post" : {
+                        "url" : ""
+                    }
+                }
+            ]
+        }
+    ]
+}

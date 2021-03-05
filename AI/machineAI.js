@@ -24,8 +24,9 @@ module.exports = (function () {
   B.ReplyAI = async (req, res) => {
     try {
       let { cause } = req.body;
-      let output = neural_network.run(cause);
-      res.send(output);
+      let output = await neural_network.run(cause);
+      if (output) return res.status(200).send(output);
+      else throw { code: 6 };
     } catch (err) {
       return res.status(400).send(errorHandler(err, req));
     }

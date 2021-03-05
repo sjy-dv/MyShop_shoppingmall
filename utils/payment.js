@@ -1,10 +1,16 @@
 const paypal = require('paypal-rest-sdk');
+const axios = require('axios');
 const dotenv = require('dotenv');
 dotenv.config();
-const { PAYPAL_CLIENT_ID, PAYPAL_SECRET } = process.env;
+const {
+  PAYPAL_CLIENT_ID,
+  PAYPAL_SECRET,
+  IPORT_RESTAPI,
+  IPORT_RESTAPI_SECRET,
+} = process.env;
 
 paypal.configure({
-  mode: 'live',
+  mode: 'sandbox',
   client_id: PAYPAL_CLIENT_ID,
   client_secret: PAYPAL_SECRET,
 });
@@ -56,6 +62,22 @@ module.exports = (function () {
       if (payment.state === 'approved') return 1;
       else return 0;
     });
+  };
+
+  P.IamPort = async (imp_uid, merchant_uid) => {
+    const get_token = await axios({
+      url: 'https://api.iamport.kr/users/getToken',
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: {
+        imp_key: IPORT_RESTAPI,
+        imp_secret: IPORT_RESTAPI_SECRET,
+      },
+    });
+    const { access_token } = get_token.data.response;
+    return access_token;
   };
 
   return P;

@@ -4,16 +4,21 @@
     "main": "app.js",
     "scripts": {
         "start": "nodemon --exec babel-node app.js -V -e js",
-        "test": "mocha"
+        "test": "mocha",
+        "frontend": "cd client && npm start",
+        "start all": "concurrently --kill-others-on-fail \"npm run frontend\" \"npm start\""
     },
     "dependencies": {
         "@babel/core": "^7.13.1",
         "@babel/node": "^7.13.0",
         "@babel/preset-env": "^7.13.5",
         "@tensorflow/tfjs": "^3.2.0",
+        "artillery": "^1.6.2",
+        "axios": "^0.21.1",
         "bcryptjs": "^2.4.3",
         "brain.js": "^2.0.0-beta.2",
         "compression": "^1.7.4",
+        "concurrently": "^6.0.0",
         "cors": "^2.8.5",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
