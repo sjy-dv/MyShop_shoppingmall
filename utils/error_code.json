@@ -22,5 +22,17 @@
     "6" : {
         "text" : "아직 학습이 끝나지 않았습니다. 잠시 후에 다시 시도해주세요.",
         "reason" : "Machine Learning is not yet"
+    },
+    "7" : {
+        "text" : "PayPal 결제 오류 발생",
+        "reason" : "paypal error"
+    },
+    "8" : {
+        "text" : "PayPal 결제 확인 중 오류 발생",
+        "reason" : "paypal payemnt error"
+    },
+    "9" : {
+        "text" : "아임포트 결제 진행 중 오류 발생",
+        "reason" : "iamport is error"
     }
 }

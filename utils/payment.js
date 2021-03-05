@@ -34,13 +34,13 @@ module.exports = (function () {
             total: `${price}`,
             currency: 'USD',
           },
-          description: 'Products purchased from MarkZenith',
+          description: 'MyShop_구매',
         },
       ],
     });
 
-    await paypal.payment.create(payReq, (error, payment) => {
-      if (error) return console.log(error);
+    paypal.payment.create(payReq, (error, payment) => {
+      if (error) console.log('paypal' + error);
       let links = {};
       payment.links.forEach(function (linkObj) {
         links[linkObj.rel] = {
@@ -49,9 +49,10 @@ module.exports = (function () {
         };
       });
       if (links.hasOwnProperty('approval_url')) {
-        return links['approval_url'].href;
+        let link = links['approval_url'].href;
+        return { link };
       } else {
-        return -1;
+        return '-1';
       }
     });
   };

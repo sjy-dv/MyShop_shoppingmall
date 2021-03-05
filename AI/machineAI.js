@@ -13,7 +13,7 @@ module.exports = (function () {
   B.StartAI = async () => {
     try {
       let starting = await neural_network.train(trainingData, {
-        iterations: 1000,
+        iterations: 1,
       });
       if (starting) return console.log('training ok');
     } catch (err) {

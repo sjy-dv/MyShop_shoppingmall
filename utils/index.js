@@ -6,6 +6,7 @@ const multer = require('./multer');
 const mail = require('./mail');
 const regex = require('./regex');
 const payment = require('./payment');
+const sms = require('./sms');
 
 module.exports = {
   error_code,
@@ -16,4 +17,5 @@ module.exports = {
   mail,
   regex,
   payment,
+  sms,
 };

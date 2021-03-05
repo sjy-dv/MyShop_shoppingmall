@@ -15,5 +15,12 @@ module.exports = (function () {
     return false;
   };
 
+  R.ToUSD = (pay) => {
+    let format_pay = pay.replace(/\,/g, '');
+    let exchange_rate = 0.00088;
+    let USD = Number(format_pay) * Number(exchange_rate);
+    return USD;
+  };
+
   return R;
 })();

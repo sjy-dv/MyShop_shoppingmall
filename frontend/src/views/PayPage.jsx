@@ -15,7 +15,7 @@ class PayPage extends Component {
   paypal = () => {
     axios
       .post('http://localhost:8081/api/payment/geturl', {
-        amount: this.state.price,
+        amount: window.sessionStorage.getItem('price'),
       })
       .then((res) => {
         if (res.data === -1) {
@@ -152,7 +152,7 @@ class PayPage extends Component {
             <input
               type="text"
               name="price"
-              value={this.state.price}
+              value={window.sessionStorage.getItem('price')}
               onChange={this.TextChange}
               required
             />

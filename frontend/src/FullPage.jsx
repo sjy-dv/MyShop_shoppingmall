@@ -39,7 +39,7 @@ const PayPage = lazy(() => import('./views/PayPage'));
 
 class FullPage extends Component {
   render() {
-    if (window.location.pathname === '/paypage') {
+    if (window.location.pathname === '/payment') {
       return (
         <Router>
           <Suspense fallback="">
@@ -91,7 +91,6 @@ class FullPage extends Component {
           <Route path="/b_write" component={BoardWrite} />
           <Route path="/boardpage" component={BoardPage} />
           <Route path="/b_update" component={BoardUpdate} />
-          <Route path="/payment" component={PayPage} />
           <Footbar></Footbar>
         </Router>
       );
