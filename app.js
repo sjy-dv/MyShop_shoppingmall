@@ -65,6 +65,7 @@ if ((!isWin && !cluster.isMaster) || (isWin && cluster.isMaster)) {
   const slowDown = require('express-slow-down');
   const RedisStore = require('rate-limit-redis');
   const socket = require('./controllers/alert');
+  const { start } = require('./AI');
 
   const corsOption = {
     origin: [
@@ -127,9 +128,5 @@ if ((!isWin && !cluster.isMaster) || (isWin && cluster.isMaster)) {
   //after write to socket server
   socket.io.attach(http_server);
 
-  const { start } = require('./AI');
-  //becasue learning is long time..
-  setTimeout(() => {
-    start.StartAI();
-  }, 2000);
+  start.StartAI();
 }

@@ -53,7 +53,6 @@ module.exports = (function () {
     try {
       let { email } = req.body;
       let authcode = await mail.sendMail(email);
-      console.log(authcode);
       if (authcode) return res.status(200).send(authcode);
       else throw { code: 1 };
     } catch (err) {

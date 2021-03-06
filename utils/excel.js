@@ -25,7 +25,7 @@ module.exports = (function () {
         xlsxobj.push([idx, p_name, p_price, pg_name, buyer]);
       }
       sheet.addRows(xlsxobj);
-      workbook.xlsx.writeFile(`${Date_NOW()}_매출 정산표`);
+      workbook.xlsx.writeFile(`${Date.now()}_매출 정산표`);
     };
     xlsxfile();
     if (!xlsxfile) console.log('xlsx created error!');

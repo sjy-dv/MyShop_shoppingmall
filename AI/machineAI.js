@@ -2,6 +2,9 @@ const brain = require('brain.js');
 const data = require('./neural_data.json');
 const { handler } = require('../utils');
 const { errorHandler } = handler;
+const dotenv = require('dotenv');
+dotenv.config();
+const { MODE } = process.env;
 const neural_network = new brain.recurrent.LSTM();
 const trainingData = data.map((m) => ({
   input: m.cause,
@@ -12,9 +15,15 @@ module.exports = (function () {
 
   B.StartAI = async () => {
     try {
-      let starting = await neural_network.train(trainingData, {
-        iterations: 1,
-      });
+      if (MODE === 'DEV') {
+        var starting = await neural_network.train(trainingData, {
+          iterations: 1,
+        });
+      } else if (MODE === 'LIVE') {
+        var starting = await neural_network.train(trainingData, {
+          iterations: 2000,
+        });
+      }
       if (starting) return console.log('training ok');
     } catch (err) {
       return console.log(err);
