@@ -8,7 +8,7 @@ const client = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
 module.exports = (function () {
   const S = {};
 
-  S.SMS = async (message, hp) => {
+  S.SendingSMS = async (message, hp) => {
     client.messages
       .create({
         body: message,

@@ -126,7 +126,7 @@ if ((!isWin && !cluster.isMaster) || (isWin && cluster.isMaster)) {
     .listen(PORT || 8081);
 
   //after write to socket server
-  socket.io.attach(http_server);
+  //socket.io.attach(http_server);
 
   start.StartAI();
 }

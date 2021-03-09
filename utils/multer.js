@@ -9,9 +9,13 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage }).fields([
+const singleupload = multer({ storage: storage }).single('img');
+
+const fieldsupload = multer({ storage: storage }).fields([
   { name: 'img' },
   { name: 'img2' },
 ]);
 
-module.exports = { upload };
+const arrayupload = multer({ storage: storage }).array('imgs', 12);
+
+module.exports = { singleupload, fieldsupload, arrayupload };

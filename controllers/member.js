@@ -1,5 +1,5 @@
 const db = require('../models');
-const { hash, jwt, handler, mail, regex } = require('../utils');
+const { hash, jwt, handler, mail, regex, sms } = require('../utils');
 const { errorHandler } = handler;
 const Member = db.member;
 
@@ -84,6 +84,19 @@ module.exports = (function () {
       );
       if (!rows) throw { code: 3 };
       res.status(200).json({ result: true });
+    } catch (err) {
+      return res.status(400).send(errorHandler(err, req));
+    }
+  };
+
+  M.SendSMS = async (req, res) => {
+    try {
+      let { message, hp } = req.body;
+      let check_hp = regex.HpCheck(hp);
+      if (!check_hp) throw { code: 3 };
+      let send_sms = await sms.SendingSMS(message, hp);
+      if (send_sms) return res.status(200).json({ result: true });
+      else throw { code: 1 };
     } catch (err) {
       return res.status(400).send(errorHandler(err, req));
     }

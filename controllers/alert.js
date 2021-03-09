@@ -16,6 +16,8 @@ module.exports = (function () {
   const S = {};
   S.alert_socket = alert_socket;
 
+  S.connectSocket = async (id) => {};
+
   S.init = async (app) => {
     alert_socket.on('connection', (socket) => {
       console.log('socket in');

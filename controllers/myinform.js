@@ -8,7 +8,7 @@ const { errorHandler } = handler;
 const Dao = require('../daos/dao');
 const dao = new Dao();
 
-module.exports = (function () {
+module.exports = function () {
   const I = {};
 
   I.addFavorite = async (req, res) => {
@@ -101,4 +101,4 @@ module.exports = (function () {
   };
 
   return I;
-})();
+};

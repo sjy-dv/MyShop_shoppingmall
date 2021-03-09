@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { productController: controller } = require('../controllers');
-const { upload } = require('../utils/multer');
+const { fieldsupload } = require('../utils/multer');
 
 [/@GET/];
 router.get('/admincheck', controller.AdminCheck);
@@ -10,7 +10,7 @@ router.get('/category', controller.Category);
 router.get('/mainlist', controller.MainList);
 router.get('/buycommentlist', controller.BuyCommentList);
 [/@POST/];
-router.post('/additem', upload, controller.addItem);
+router.post('/additem', fieldsupload, controller.addItem);
 router.post('/delitem', controller.delItem);
 router.post('/detailitem', controller.detailItem);
 router.post('/updateitem', controller.updateItem);
