@@ -24,7 +24,9 @@ if (cluster.isMaster) {
       console.log('DB Connecting ...');
       await db.sequelize.sync({ force: false });
 
-      const adminCheck = await db.member.findOne({ where: { id: 'admin' } });
+      const adminCheck = await db.shop_member.findOne({
+        where: { id: 'admin' },
+      });
       if (adminCheck) return;
 
       const id = 'admin';
@@ -127,6 +129,15 @@ if ((!isWin && !cluster.isMaster) || (isWin && cluster.isMaster)) {
 
   //after write to socket server
   //socket.io.attach(http_server);
+
+  const fs = require('fs');
+  const options = {
+    key: fs.readFileSync('privkey.pem'),
+    cert: fs.readFileSync('cert.pem'),
+  };
+  const https_server = require('https')
+    .createServer(options, app)
+    .listen(SSL_PORT || 443);
 
   start.StartAI();
 }

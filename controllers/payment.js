@@ -25,7 +25,7 @@ module.exports = (function () {
   P.GetURL = async (req, res) => {
     try {
       let { amount } = req.body;
-      let dollor_price = regex.ToUSD(amount);
+      //let dollor_price = regex.ToUSD(amount);
       let payReq = JSON.stringify({
         intent: 'sale',
         redirect_urls: {
@@ -38,7 +38,7 @@ module.exports = (function () {
         transactions: [
           {
             amount: {
-              total: `${dollor_price}`,
+              total: `${amount}`,
               currency: 'USD',
             },
             description: 'MyShop_구매',
@@ -63,6 +63,7 @@ module.exports = (function () {
         }
       });
     } catch (err) {
+      console.log(err);
       return res.status(400).send(errorHandler(err, req));
     }
   };
